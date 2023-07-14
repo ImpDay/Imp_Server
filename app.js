@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const mysql = require('mysql');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -26,6 +27,23 @@ app.use('/users', usersRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// Set mysql connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'roqkf##01',
+  database: 'imp_db'
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('MySQL 연결 실패:', err);
+    return;
+  }
+  console.log('MySQL 연결 성공');
+});
+
 
 // error handler
 app.use(function(err, req, res, next) {
