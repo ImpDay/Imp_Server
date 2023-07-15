@@ -15,6 +15,17 @@ class UserController {
       res.status(500).send('서버 오류');
     }
   }
+
+  async createUser(req, res) {
+    try {
+        console.log("일단 여기까지는 들어옴");
+        const userData = req.body;
+        const userIntId = await userService.createUser(userData);
+        res.status(201).json({id: userIntId})
+    } catch (error) {
+        res.status(500).send('사용자 생성에 실패했습니다.');
+    }
+  }
 }
 
 module.exports = UserController;
