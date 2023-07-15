@@ -12,7 +12,7 @@ router.get('/', userController.getAllUsers);
 // 사용자 추가하기
 router.post('/', userController.createUser);
 
-// // id로 user 객체 가져오기
+// id로 user 객체 가져오기
 // router.get('/:id', userController.getUserById);
 
 // // userId로 user 객체 가져오기

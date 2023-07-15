@@ -26,22 +26,20 @@ class UserDA {
         return new Promise((resolve, reject) => {
             db.execute(query, values, (err, results) => {
             if (err) {
-                if (err.code === 'ER_DUP_ENTRY'){
+                if (err.code === 'ER_DUP_ENTRY') {
                     reject(new Error('중복된 값이 있습니다!'));
                     return;
-                } else{
+                } else {
                     console.log(err.message);
                     reject(new Error('사용자 정보를 가져오는데 실패했습니다.'));
                     return;
                 }
-                
             }
-            console.log(results[0]);
-            resolve(results);
+            console.log(results.insertId);
+            resolve(results.insertId); // 생성된 사용자의 ID 반환
             });
         });
     }
 }
-
 
 module.exports = UserDA;
