@@ -41,6 +41,21 @@ class UserDA {
     });
   }
 
+  async deleteUser(id) {
+    const query = 'DELETE FROM Users WHERE id = ?';
+    const values = id;
+    return new Promise((resolve, reject) => {
+      db.execute(query, [values], (err, results) => {
+      if (err) {
+        console.log(err.message);
+        reject(new Error('user를 삭제하는데 실패했습니다.'));
+        return;
+      }
+      resolve();
+      });
+    });
+  }
+
   async getUserById(id) {
     const query = 'SELECT * FROM Users WHERE id = ?';
     return new Promise((resolve, reject) => {

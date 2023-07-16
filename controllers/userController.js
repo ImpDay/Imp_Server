@@ -26,6 +26,17 @@ class UserController {
     }
   }
 
+  async deleteUser(req, res) {
+    try {
+      const id = req.params.id;
+      console.log("This is id : " + id);
+      await userService.deleteUser(id);
+      res.status(204).end();
+    } catch (error) {
+      res.status(500).send('User 삭제에 실패했습니다.');
+    }
+  }
+
   async getUserById(req, res) {
     try {
       const id = req.params.id;

@@ -12,6 +12,9 @@ router.get('/', userController.getAllUsers);
 // 사용자 추가하기
 router.post('/', userController.createUser);
 
+// 사용자 지우기
+router.delete('/:id', userController.deleteUser);
+
 // id로 user 객체 가져오기
 router.get('/:id', userController.getUserById);
 

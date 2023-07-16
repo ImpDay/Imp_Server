@@ -24,6 +24,14 @@ class UserService {
     }
   }
 
+  async deleteUser(id){
+    try {
+      await userDA.deleteUser(id);
+    } catch (error) {
+      throw new Error('User 삭제에 실패하였습니다.(UserService)');
+    }
+  }
+
   async getUserById(id) {
     try {
       const user = await userDA.getUserById(id);
