@@ -10,6 +10,7 @@ var templatesRouter = require('./routes/templateRoutes');
 var recordsRouter = require('./routes/recordRoutes');
 var questionsRouter = require('./routes/questionRoutes');
 var answersRouter = require('./routes/answerRoutes');
+var friendsRouter = require('./routes/friendRoutes');
 
 var app = express();
 // const db = require('./db/db')
@@ -29,6 +30,7 @@ app.use('/templates', templatesRouter);
 app.use('/records', recordsRouter);
 app.use('/questions', questionsRouter);
 app.use('/answers', answersRouter);
+app.use('/friends', friendsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
