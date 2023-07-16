@@ -6,7 +6,7 @@ const userService = new UserService();
 
 class UserController {
   // 모든 사용자 정보 가져오기
-  async getAllTemplates(req, res) {
+  async getAllUsers(req, res) {
     try {
       const users = await userService.getAllUsers();
       res.status(200).json(users);
@@ -16,7 +16,7 @@ class UserController {
     }
   }
 
-  async createTemplate(req, res) {
+  async createUser(req, res) {
     try {
       const userData = req.body;
       const userIntId = await userService.createUser(userData);
