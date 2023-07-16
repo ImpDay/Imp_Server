@@ -31,7 +31,7 @@ class UserController {
       const id = req.params.id;
       console.log("This is id : " + id);
       const user = await userService.getUserById(id);
-      res.status(201).json(user);
+      res.status(200).json(user);
     } catch (error) {
       res.status(500).send('사용자 가져오기에 실패했습니다.');
     }
@@ -42,7 +42,7 @@ class UserController {
       const id = req.params.id;
       console.log("This is id : " + id);
       const user = await userService.getUserNicknameById(id);
-      res.status(201).json(user);
+      res.status(200).json(user);
     } catch (error) {
       res.status(500).send('사용자 가져오기에 실패했습니다.');
     }
