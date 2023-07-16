@@ -13,15 +13,13 @@ router.get('/', userController.getAllUsers);
 router.post('/', userController.createUser);
 
 // id로 user 객체 가져오기
-// router.get('/:id', userController.getUserById);
+router.get('/:id', userController.getUserById);
 
-// // userId로 user 객체 가져오기
-// router.get('/:userId', userController.getUserByUserId);
+// id로 user nickname 가져오기
+router.get('/:id/nickname', userController.getUserNicknameById);
 
-// // id로 user nickname 가져오기
-// router.get('/:id', userController.getUserNicknameById);
+// id로 user profile 가져오기
+// router.get('/:id/nickname', userController.getUserNicknameById);
 
-// // userId로 nickname 가져오기
-// router.get('/:userId', userController.getUserByUserId);
 
 module.exports = router;

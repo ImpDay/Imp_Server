@@ -17,11 +17,28 @@ class UserService {
 
   async createUser(userData){
     try {
-        console.log("여기까지도 잘와")
       const userId = await userDA.createUser(userData);
       return userId;
     } catch (error) {
       throw new Error('사용자 생성에 실패했습니다.');
+    }
+  }
+
+  async getUserById(id) {
+    try {
+      const user = await userDA.getUserById(id);
+      return user;
+    } catch (error) {
+      throw new Error('사용자 정보를 가져오는데 실패하였습니다. (UserService)');
+    }
+  }
+
+  async getUserNicknameById(id) {
+    try {
+      const user = await userDA.getUserNicknameById(id);
+      return user;
+    } catch (error) {
+      throw new Error('사용자 정보를 가져오는데 실패하였습니다. (UserService)');
     }
   }
 }
