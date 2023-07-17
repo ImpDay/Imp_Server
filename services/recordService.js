@@ -70,9 +70,9 @@ class RecordService {
     }
   }
 
-  async getAllRecordedDate() {
+  async getAllRecordedDateByUserId(userId) {
     try {
-      const createdTimes = await recordDA.getAllRecordedDate();
+      const createdTimes = await recordDA.getAllRecordedDateByUserId(userId);
       return createdTimes;
     } catch (error) {
       throw new Error('createdTimes 정보를 가져오는데 실패하였습니다.(RecordService)');

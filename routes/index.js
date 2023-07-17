@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 // 기록이 있는 모든 날짜 가져오기
-router.get('/recordedDates', recordController.getAllRecordedDate);
+router.get('/recordedDates', recordController.getAllRecordedDateByUserId);
 
 // 특정 날짜의 점수 반환하기
 router.get('/getScore', answerController.getDateScoreByUserId);

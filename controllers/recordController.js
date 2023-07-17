@@ -83,9 +83,10 @@ class RecordController {
     }
   }
 
-  async getAllRecordedDate(req, res) {
+  async getAllRecordedDateByUserId(req, res) {
     try {
-      const createdTimes = await recordService.getAllRecordedDate();
+      const userId = req.query.userId;
+      const createdTimes = await recordService.getAllRecordedDateByUserId(userId);
       res.status(200).json(createdTimes);
     } catch (error) {
       res.status(500).send('모든 recordedTime 가져오기에 실패했습니다.');
