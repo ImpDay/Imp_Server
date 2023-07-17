@@ -73,7 +73,9 @@ class AnswerService {
         totalCharacterCount += string.length;
       }
       const score = Math.round(totalCharacterCount / 1000 * 100);
-
+      if(score > 100){
+        return 100;
+      }
       return score;
 
     } catch (error) {
