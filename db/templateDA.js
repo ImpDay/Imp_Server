@@ -111,6 +111,20 @@ class TemplateDA {
       });
     });
   }
+
+  async updateLastRecordedTimeByTemplateId(templateId) {
+    const query = 'UPDATE Templates SET lastRecordedTime = CURRENT_TIMESTAMP() WHERE templateId = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [templateId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('마지막 기록 시간 수정에 실패했습니다.'));
+          return;
+        }
+        resolve();
+      });
+    });
+  }
 }
 
 module.exports = TemplateDA;

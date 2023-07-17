@@ -1,8 +1,10 @@
 // services/userService.js
 
 const RecordDA = require('../db/recordDA');
+const TemplateDA = require('../db/templateDA');
 
 const recordDA = new RecordDA();
+const templateDA = new TemplateDA();
 
 class RecordService {
   // 모든 사용자 정보 가져오기
@@ -18,6 +20,7 @@ class RecordService {
   async createRecord(recordData){
     try {
       const recordId = await recordDA.createRecord(recordData);
+      await templateDA.updateLastRecordedTimeByTemplateId(recordData.templateId);
       return recordId;
     } catch (error) {
       throw new Error('record 생성에 실패하였습니다.(RecordService)');
