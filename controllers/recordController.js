@@ -82,6 +82,15 @@ class RecordController {
       res.status(500).send('템플릿 가져오기에 실패했습니다.');
     }
   }
+
+  async getAllRecordedDate(req, res) {
+    try {
+      const createdTimes = await recordService.getAllRecordedDate();
+      res.status(200).json(createdTimes);
+    } catch (error) {
+      res.status(500).send('모든 recordedTime 가져오기에 실패했습니다.');
+    }
+  }
 }
 
 module.exports = RecordController;

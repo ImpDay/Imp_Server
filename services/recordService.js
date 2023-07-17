@@ -66,6 +66,15 @@ class RecordService {
       throw new Error(recordId + '의 createdTime 정보를 가져오는데 실패하였습니다.(RecordService)');
     }
   }
+
+  async getAllRecordedDate() {
+    try {
+      const createdTimes = await recordDA.getAllRecordedDate();
+      return createdTimes;
+    } catch (error) {
+      throw new Error('createdTimes 정보를 가져오는데 실패하였습니다.(RecordService)');
+    }
+  }
 }
 
 module.exports = RecordService;

@@ -45,7 +45,7 @@ class QuestionController {
       const questions = await questionService.getAllQuestionsBytemplateId(templateId);
       res.status(200).json(questions);
     } catch (error) {
-      res.status(500).send('Record 가져오기에 실패했습니다.');
+      res.status(500).send('질문들 가져오기에 실패했습니다.');
     }
   }
 

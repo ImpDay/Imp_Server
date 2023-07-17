@@ -25,6 +25,7 @@ router.put('/:recordId/lastEditedTime', recordController.updateLastEditedTimeByR
 // recordId로 createdTime 가져오기
 router.get('/:recordId/createdTime', recordController.getCreatedTimeByRecordId);
 
-
+// 기록이 있는 모든 날짜 가져오기
+router.get('/recordedDate', recordController.getAllRecordedDate);
 
 module.exports = router;

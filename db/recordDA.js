@@ -127,6 +127,27 @@ class RecordDA {
       });
     });
   }
+
+  async getAllRecordedDate() {
+    const query = 'SELECT DISTINCT DATE_FORMAT(createdTime, \'%Y-%m-%d\') AS uniqueDates FROM Records';
+    return new Promise((resolve, reject) => {
+      db.execute(query, (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('생성된 시간들의 목록을 가져오는데 실패했습니다.'));
+          return;
+        }
+        if (results.length === 0) {
+          reject(new Error('기록이 생성된 시간이 없습니다.'));
+          return;
+        }
+        
+        const createdTimes = results.map((row) => row.uniqueDates);
+        console.log("This is createdTimes : " + createdTimes);
+        resolve(createdTimes);
+      });
+    });
+  }
 }
 
 module.exports = RecordDA;
