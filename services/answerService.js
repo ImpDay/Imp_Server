@@ -1,8 +1,10 @@
 // services/userService.js
 
 const AnswerDA = require('../db/answerDA');
+const RecordDA = require('../db/recordDA');
 
 const answerDA = new AnswerDA();
+const recordDA = new RecordDA();
 
 class AnswerService {
   // 모든 사용자 정보 가져오기
@@ -17,6 +19,9 @@ class AnswerService {
 
   async createAnswer(answerData){
     try {
+      const createTimeObject = await recordDA.getCreatedTimeByRecordId(answerData.recordId);
+      answerData.createdTime = createTimeObject.createdTime;
+      console.log("This is CreatedTime : " + answerData.createdTime);
       const answerId = await answerDA.createAnswer(answerData);
       return answerId;
     } catch (error) {

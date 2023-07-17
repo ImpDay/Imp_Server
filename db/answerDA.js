@@ -19,8 +19,8 @@ class AnswerDA {
 
 
   async createAnswer(answerData) {
-    const query = 'INSERT INTO Answers (answer, questionId, recordId) VALUES (?, ?, ?)';
-    const values = [answerData.answer, answerData.questionId, answerData.recordId];
+    const query = 'INSERT INTO Answers (answer, questionId, recordId, createdTime) VALUES (?, ?, ?, ?)';
+    const values = [answerData.answer, answerData.questionId, answerData.recordId, answerData.createdTime];
     return new Promise((resolve, reject) => {
       db.execute(query, values, (err, results) => {
       if (err) {
