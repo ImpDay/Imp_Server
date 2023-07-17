@@ -60,6 +60,18 @@ class TemplateController {
       res.status(500).send('템플릿 가져오기에 실패했습니다.');
     }
   }
+
+  async updateTemplateNameByTemplateId(req, res) {
+    try {
+      const templateData = req.body;
+      const templateId = req.params.templateId;
+      console.log("This is templateId : " + templateId);
+      await templateService.updateTemplateNameByTemplateId(templateId, templateData);
+      res.status(200).end();
+    } catch (error) {
+      res.status(500).send('Template Name 수정에 실패했습니다.');
+    }
+  }
 }
 
 module.exports = TemplateController;

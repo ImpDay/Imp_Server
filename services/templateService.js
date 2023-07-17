@@ -50,6 +50,14 @@ class TemplateService {
       throw new Error(templateId + '의 이름 정보를 가져오는데 실패하였습니다.(TemplateService)');
     }
   }
+
+  async updateTemplateNameByTemplateId(templateId, templateData) {
+    try {
+      await templateDA.updateTemplateNameByTemplateId(templateId, templateData);
+    } catch (error) {
+      throw new Error(templateId + '의 이름 수정에 실패하였습니다.(TemplateService)');
+    }
+  }
 }
 
 module.exports = TemplateService;

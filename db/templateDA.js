@@ -97,6 +97,20 @@ class TemplateDA {
       });
     });
   }
+
+  async updateTemplateNameByTemplateId(templateId, templateData) {
+    const query = 'UPDATE Templates SET templateName = ? WHERE templateId = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [templateData.templateName, templateId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('이름 정보 수정에 실패했습니다.'));
+          return;
+        }
+        resolve();
+      });
+    });
+  }
 }
 
 module.exports = TemplateDA;
