@@ -111,6 +111,25 @@ class AnswerDA {
     });
   }
 
+  async getAllAnwersByCreatedTime(DateData) {
+    const query = 'SELECT answer FROM Answers WHERE DATE_FORMAT(createdTime, \'%Y-%m-%d\') = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [DateData.date], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('응답 정보를 가져오는데 실패했습니다.'));
+          return;
+        }
+        // const answers = results;
+        const answers = results.map((row) => row.answer);
+        
+        console.log(results[0]);
+        console.log("This is all answer : " + answers);
+        resolve(answers);
+      });
+    });
+  }
+
 }
 
 module.exports = AnswerDA;

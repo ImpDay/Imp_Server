@@ -63,6 +63,24 @@ class AnswerService {
     }
   }
 
+  async getDateScore(DateData) {
+    try {
+      const answers = await answerDA.getAllAnwersByCreatedTime(DateData);
+      let totalCharacterCount = 0;
+      // 문자열 배열의 각 요소에 대해서 반복
+      for (let i = 0; i < answers.length; i++) {
+        const string = answers[i];
+        totalCharacterCount += string.length;
+      }
+      const score = Math.round(totalCharacterCount / 1000 * 100);
+
+      return score;
+
+    } catch (error) {
+      throw new Error('점수 계산에 실패하였습니다.(AnswerService)');
+    }
+  }
+
 }
 
 module.exports = AnswerService;
