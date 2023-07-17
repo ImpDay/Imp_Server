@@ -50,6 +50,18 @@ class TemplateController {
     }
   }
 
+  async updatePeriodByTemplateId(req, res) {
+    try {
+      const templateData = req.body;
+      const templateId = req.params.templateId;
+      console.log("This is templateId : " + templateId);
+      await templateService.updatePeriodByTemplateId(templateId, templateData);
+      res.status(200).end();
+    } catch (error) {
+      res.status(500).send('Template period 수정에 실패했습니다.');
+    }
+  }
+
   async getTemplateNameByTemplateId(req, res) {
     try {
       const templateId = req.params.templateId;

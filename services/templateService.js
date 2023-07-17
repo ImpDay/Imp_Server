@@ -42,6 +42,14 @@ class TemplateService {
     }
   }
 
+  async updatePeriodByTemplateId(templateId, templateData) {
+    try {
+      await templateDA.updatePeriodByTemplateId(templateId, templateData);
+    } catch (error) {
+      throw new Error(templateId + '의 주기 수정에 실패하였습니다.(TemplateService)');
+    }
+  }
+
   async getTemplateNameByTemplateId(templateId) {
     try {
       const templateName = await templateDA.getTemplateNameByTemplateId(templateId);

@@ -16,6 +16,9 @@ router.get('/:id', templateController.getAllTemplatesByUserId);
 // templateId로 주기 가져오기
 router.get('/:templateId/period', templateController.getPeriodByTemplateId);
 
+// templateId로 주기 수정하기
+router.put('/:templateId/period', templateController.updatePeriodByTemplateId);
+
 // templateId로 templateName 가져오기
 router.get('/:templateId/templateName', templateController.getTemplateNameByTemplateId);
 

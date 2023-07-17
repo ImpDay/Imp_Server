@@ -78,6 +78,20 @@ class TemplateDA {
     });
   }
 
+  async updatePeriodByTemplateId(templateId, templateData) {
+    const query = 'UPDATE Templates SET writePeriod = ? WHERE templateId = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [templateData.period, templateId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('이름 정보 수정에 실패했습니다.'));
+          return;
+        }
+        resolve();
+      });
+    });
+  }
+
   async getTemplateNameByTemplateId(templateId) {
     const query = 'SELECT templateName FROM Templates WHERE templateId = ?';
     return new Promise((resolve, reject) => {
