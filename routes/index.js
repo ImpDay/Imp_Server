@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.get('/recordedDates', recordController.getAllRecordedDate);
 
 // 특정 날짜의 점수 반환하기
-router.get('/getScore', answerController.getDateScore);
+router.get('/getScore', answerController.getDateScoreByUserId);
 
 
 module.exports = router;

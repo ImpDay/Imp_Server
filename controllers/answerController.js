@@ -72,10 +72,11 @@ class AnswerController {
     }
   }
 
-  async getDateScore(req, res) {
+  async getDateScoreByUserId(req, res) {
     try {
-      const DateData = req.body;
-      const answers = await answerService.getDateScore(DateData);
+      const date = req.query.date;
+      const userId = req.query.userId;
+      const answers = await answerService.getDateScoreByUserId(date, userId);
       res.status(200).json(answers);
     } catch (error) {
       res.status(500).send('점수 계산에 실패했습니다.');

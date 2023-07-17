@@ -63,9 +63,9 @@ class AnswerService {
     }
   }
 
-  async getDateScore(DateData) {
+  async getDateScoreByUserId(date, userId) {
     try {
-      const answers = await answerDA.getAllAnwersByCreatedTime(DateData);
+      const answers = await answerDA.getAllUserAnwersByCreatedTime(date, userId);
       let totalCharacterCount = 0;
       // 문자열 배열의 각 요소에 대해서 반복
       for (let i = 0; i < answers.length; i++) {
