@@ -50,6 +50,40 @@ class TemplateService {
     }
   }
 
+  async getLeftDayByTemplateId(templateId) {
+    try {
+      
+      const lastRecordedTime = await templateDA.getLastRecordedTimeByTemplateId(templateId);
+      const period = await templateDA.getPeriodByTemplateId(templateId);
+      
+      const timestampDate = new Date(lastRecordedTime.lastRecordedTime);
+
+      // 현재 날짜를 나타내는 JavaScript의 Date 객체 생성
+      const currentDate = new Date();
+      // const currentDate = new Date("2023-07-22T08:04:47.000Z");
+
+      // 날짜 값만 가져오기
+      const timestampDateOnly = new Date(timestampDate.getFullYear(), timestampDate.getMonth(), timestampDate.getDate());
+      const currentDateOnly = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+
+      // 일 수 차이 계산
+      const timeDiff = Math.abs(currentDateOnly - timestampDateOnly);
+      const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+      console.log("Calculate Left Day");
+      console.log("This is period : " + period.writePeriod);
+      console.log("This is currentDateOnly : "+ currentDateOnly);
+      console.log("This is timestampDateOnly : "+ timestampDateOnly);
+
+      const leftDay = period.writePeriod - daysDiff;
+
+      console.log("This is leftDay : " + leftDay);
+      return leftDay;
+    } catch (error) {
+      throw new Error(templateId + '의 남은 일자 정보를 가져오는데 실패하였습니다.(TemplateService)');
+    }
+  }
+
   async getTemplateNameByTemplateId(templateId) {
     try {
       const templateName = await templateDA.getTemplateNameByTemplateId(templateId);

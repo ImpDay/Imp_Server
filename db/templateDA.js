@@ -112,6 +112,26 @@ class TemplateDA {
     });
   }
 
+  async getLastRecordedTimeByTemplateId(templateId) {
+    const query = 'SELECT lastRecordedTime FROM Templates WHERE templateId = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [templateId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('이름 정보를 가져오는데 실패했습니다.'));
+          return;
+        }
+        if (results.length === 0) {
+          reject(new Error('해당 id를 가진 템플릿이 없습니다.'));
+          return;
+        }
+        const lastRecordedTime = results[0];
+        console.log(lastRecordedTime);
+        resolve(lastRecordedTime);
+      });
+    });
+  }
+
   async updateTemplateNameByTemplateId(templateId, templateData) {
     const query = 'UPDATE Templates SET templateName = ? WHERE templateId = ?';
     return new Promise((resolve, reject) => {

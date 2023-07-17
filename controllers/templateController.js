@@ -62,6 +62,17 @@ class TemplateController {
     }
   }
 
+  async getLeftDayByTemplateId(req, res) {
+    try {
+      const templateId = req.params.templateId;
+      console.log("This is templateId : " + templateId);
+      const period = await templateService.getLeftDayByTemplateId(templateId);
+      res.status(200).json(period);
+    } catch (error) {
+      res.status(500).send('템플릿의 남은 시간 가져오기에 실패했습니다.');
+    }
+  }
+
   async getTemplateNameByTemplateId(req, res) {
     try {
       const templateId = req.params.templateId;

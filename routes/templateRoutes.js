@@ -19,6 +19,10 @@ router.get('/:templateId/period', templateController.getPeriodByTemplateId);
 // templateId로 주기 수정하기
 router.put('/:templateId/period', templateController.updatePeriodByTemplateId);
 
+// templateId로 남은 날짜 가져오기(당일이면 0, 하루 지났으면 -1 반환)
+router.get('/:templateId/leftDay', templateController.getLeftDayByTemplateId);
+
+
 // templateId로 templateName 가져오기
 router.get('/:templateId/templateName', templateController.getTemplateNameByTemplateId);
 
