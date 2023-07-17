@@ -76,6 +76,26 @@ class UserDA {
     });
   }
 
+  async getPasswordByLoginId(loginId) {
+    const query = 'SELECT password FROM Users WHERE userId = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [loginId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('사용자 정보를 가져오는데 실패했습니다.'));
+          return;
+        }
+        if (results.length === 0) {
+          reject(new Error('해당 id를 가진 사용자가 없습니다.'));
+          return;
+        }
+        const password = results[0];
+        console.log(password);
+        resolve(password);
+      });
+    });
+  }
+
   async getUserNicknameById(id) {
     const query = 'SELECT nickname FROM Users WHERE id = ?';
     return new Promise((resolve, reject) => {

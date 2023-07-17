@@ -15,6 +15,20 @@ class UserService {
     }
   }
 
+  async login(loginId, password) {
+    try {
+      const passwordData = await userDA.getPasswordByLoginId(loginId, password);
+      console.log("This is passwordData : " + passwordData);
+      if(password == passwordData.password){
+        return true;
+      }else{
+        throw new Error('비밀번호가 틀립니다');
+      }
+    } catch (error) {
+      throw new Error('사용자 정보를 가져오는데 실패 UserService.');
+    }
+  }
+
   async createUser(userData){
     try {
       const userId = await userDA.createUser(userData);

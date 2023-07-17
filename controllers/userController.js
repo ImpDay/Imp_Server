@@ -16,6 +16,18 @@ class UserController {
     }
   }
 
+  async login(req, res) {
+    try {
+      const loginId = req.query.loginId;
+      const password = req.query.password;
+      const isPossible = await userService.login(loginId, password);
+      res.status(200).send(isPossible);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('서버 오류');
+    }
+  }
+
   async createUser(req, res) {
     try {
       const userData = req.body;
