@@ -115,6 +115,27 @@ class UserDA {
       });
     });
   }
+
+
+  async getUserByLoginIdAndPassword(loginId, password) {
+    const query = 'SELECT * FROM Users WHERE userId = ? AND password = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [loginId, password], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('사용자 정보를 가져오는데 실패했습니다.'));
+          return;
+        }
+        if (results.length === 0) {
+          reject(new Error('해당 id를 가진 사용자가 없습니다.'));
+          return;
+        }
+        const user = results[0];
+        console.log(user);
+        resolve(user);
+      });
+    });
+  }
 }
 
 module.exports = UserDA;

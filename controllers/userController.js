@@ -16,17 +16,29 @@ class UserController {
     }
   }
 
+  async signup(req, res) {
+    try {
+      const { loginId, password, nickname } = req.body;
+      await userService.signup(loginId, password, nickname);
+      res.status(201).json({ message: '회원 가입이 완료되었습니다.' });
+    } catch (error) {
+      res.status(500).json({ error: '회원 가입에 실패했습니다.' });
+    }
+  } 
+
   async login(req, res) {
     try {
-      const loginId = req.query.loginId;
-      const password = req.query.password;
-      const isPossible = await userService.login(loginId, password);
-      res.status(200).send(isPossible);
+      const { loginId, password } = req.body;
+      const user = await userService.login(loginId, password);
+      console.log("This is User : " + user.id);
+      req.session.userId = user.id; // 세션에 사용자 ID 저장
+      const userId = user.id;
+      res.status(200).json(userId);
     } catch (error) {
-      console.error(error);
-      res.status(500).send('서버 오류');
+      res.status(401).json({ error: '로그인에 실패했습니다.' });
     }
-  }
+  } 
+
 
   async createUser(req, res) {
     try {
