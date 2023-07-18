@@ -76,6 +76,21 @@ class AnswerDA {
     });
   }
 
+  async getAllAnwersByRecordId(recordId) {
+    const query = 'SELECT answer FROM Answers WHERE recordId = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [recordId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('응답 정보를 가져오는데 실패했습니다.'));
+          return;
+        }
+        const records = results;
+        resolve(records);
+      });
+    });
+  }
+
   async getAnswerByQuestionRecordId(questionId, recordId) {
     const query = 'SELECT answer FROM Answers WHERE questionId = ? AND recordId = ?';
     return new Promise((resolve, reject) => {

@@ -1,8 +1,12 @@
 // services/userService.js
 
 const TemplateDA = require('../db/templateDA');
+const RecordDA = require('../db/recordDA');
+const AnswerDA = require('../db/answerDA');
 
 const templateDA = new TemplateDA();
+const recordDA = new RecordDA();
+const answerDA = new AnswerDA();
 
 class TemplateService {
   // 모든 사용자 정보 가져오기
@@ -100,6 +104,35 @@ class TemplateService {
       throw new Error(templateId + '의 이름 수정에 실패하였습니다.(TemplateService)');
     }
   }
+
+  async getAverageScoreByTemplateId(templateId) {
+  try {
+    const recordScores = [];
+    var averageScore = 0;
+    const recordList = await recordDA.getAllRecordsBytemplateId(templateId);
+    for (const record of recordList) {
+      const answerList = await answerDA.getAllAnwersByRecordId(record.recordId);
+      var recordScore = 0;;
+      answerList.forEach(element => {
+        recordScore +=  Math.round(element.answer.length / 1000 * 100);
+      });
+      if(recordScore > 100){
+        recordScore = 100;
+      }
+      recordScores.push(recordScore);
+    }
+
+    for(let i=0; i<recordScores.length; i++){
+        averageScore += recordScores[i];
+    }
+    
+    averageScore = Math.round(averageScore/recordScores.length);
+    
+    return averageScore;
+  } catch (error) {
+    throw new Error(templateId + '의 평균 점수를 계산하는데 실패하였습니다.(TemplateService)');
+  }
+}
 }
 
 module.exports = TemplateService;

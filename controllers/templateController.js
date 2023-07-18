@@ -30,9 +30,9 @@ class TemplateController {
 
   async getAllTemplatesByUserId(req, res) {
     try {
-      const id = req.params.id;
-      console.log("This is id : " + id);
-      const templates = await templateService.getAllTemplatesByUserId(id);
+      const userId = req.session.userId;
+      console.log("This is useruserid : " + userId);
+      const templates = await templateService.getAllTemplatesByUserId(userId);
       res.status(200).json(templates);
     } catch (error) {
       res.status(500).send('템플릿 가져오기에 실패했습니다.');
@@ -95,6 +95,18 @@ class TemplateController {
       res.status(500).send('Template Name 수정에 실패했습니다.');
     }
   }
+
+  async getAverageScoreByTemplateId(req, res) {
+    try {
+      const templateId = req.params.templateId;
+      console.log("This is templateId : " + templateId);
+      const averageScore = await templateService.getAverageScoreByTemplateId(templateId);
+      res.status(200).json(averageScore);
+    } catch (error) {
+      res.status(500).send('Template Name 수정에 실패했습니다.');
+    }
+  }
+  
 }
 
 module.exports = TemplateController;
