@@ -75,7 +75,7 @@ class AnswerController {
   async getDateScoreByUserId(req, res) {
     try {
       const date = req.query.date;
-      const userId = req.query.userId;
+      const userId = req.session.userId;
       const answers = await answerService.getDateScoreByUserId(date, userId);
       res.status(200).json(answers);
     } catch (error) {

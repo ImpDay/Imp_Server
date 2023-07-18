@@ -53,19 +53,32 @@ class FriendDA {
   
 
   async getAllFriendsByUserId(userId) {
-    const query = 'SELECT CASE WHEN userId1 = ? THEN userId2 ELSE userId1 END AS friendId FROM Friends WHERE userId1 = ? OR userId2 = ?';
+    const query = 'SELECT userId2 FROM Friends WHERE userId1 = ?';
+    console.log(`get friends userId : ${userId}`);
     return new Promise((resolve, reject) => {
-      db.execute(query, [userId, userId, userId], (err, results) => {
+      db.execute(query, [userId], (err, results) => {
         if (err) {
           console.log(err.message);
           reject(new Error('친구 정보를 가져오는데 실패했습니다.'));
           return;
         }
-        if (results.length === 0) {
-          reject(new Error('해당 사용자가 가진 친구가 없습니다.'));
+        console.log(results);
+        const friends = results.map(item => item.userId2);
+        resolve(friends);
+      });
+    });
+  }
+
+  async getAllFollowersByUserId(userId) {
+    const query = 'SELECT userId1 FROM Friends WHERE userId2 = ?';
+    return new Promise((resolve, reject) => {
+      db.execute(query, [userId], (err, results) => {
+        if (err) {
+          console.log(err.message);
+          reject(new Error('친구 정보를 가져오는데 실패했습니다.'));
           return;
         }
-        const friends = results.map(item => item.friendId);
+        const friends = results.map(item => item.userId1);
         resolve(friends);
       });
     });

@@ -100,10 +100,6 @@ class AnswerDA {
           reject(new Error('응답 정보를 가져오는데 실패했습니다.'));
           return;
         }
-        if (results.length === 0) {
-          reject(new Error('해당 id를 가진 응답이 없습니다.'));
-          return;
-        }
         const answer = results[0];
         console.log(answer);
         resolve(answer);

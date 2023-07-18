@@ -16,10 +16,10 @@ router.post('/', userController.createUser);
 router.delete('/:id', userController.deleteUser);
 
 // id로 user 객체 가져오기
-router.get('/:id', userController.getUserById);
+router.get('/user', userController.getUserById);
 
 // id로 user nickname 가져오기
-router.get('/:id/nickname', userController.getUserNicknameById);
+router.get('/nickname', userController.getUserNicknameById);
 
 // id로 user profile 가져오기
 // router.get('/:id/nickname', userController.getUserNicknameById);

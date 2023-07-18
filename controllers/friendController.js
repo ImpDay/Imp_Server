@@ -39,10 +39,21 @@ class FriendController {
 
   async getAllFriendsByUserId(req, res) {
     try {
-      const userId = req.params.id;
+      const userId = req.session.userId;
       console.log("This is userId : " + userId);
       const friends = await friendService.getAllFriendsByUserId(userId);
       res.status(200).json(friends);
+    } catch (error) {
+      res.status(500).send('Answer 가져오기에 실패했습니다.');
+    }
+  }
+
+  async getAllFollowersByUserId(req, res) {
+    try {
+      const userId = req.session.userId;
+      console.log("This is userId : " + userId);
+      const followers = await friendService.getAllFollowersByUserId(userId);
+      res.status(200).json(followers);
     } catch (error) {
       res.status(500).send('Answer 가져오기에 실패했습니다.');
     }

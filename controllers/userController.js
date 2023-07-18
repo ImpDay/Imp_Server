@@ -74,7 +74,7 @@ class UserController {
 
   async getUserNicknameById(req, res) {
     try {
-      const id = req.params.id;
+      const id = req.session.userId;
       console.log("This is id : " + id);
       const user = await userService.getUserNicknameById(id);
       res.status(200).json(user);

@@ -85,7 +85,7 @@ class RecordController {
 
   async getAllRecordedDateByUserId(req, res) {
     try {
-      const userId = req.query.userId;
+      const userId = req.session.userId;
       const createdTimes = await recordService.getAllRecordedDateByUserId(userId);
       res.status(200).json(createdTimes);
     } catch (error) {

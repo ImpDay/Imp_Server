@@ -14,6 +14,9 @@ router.post('/', friendController.createFriends);
 router.delete('/', friendController.deleteFriend);
 
 // 특정 user의 친구 목록 가져오기
-router.get('/:id', friendController.getAllFriendsByUserId);
+router.get('/friends', friendController.getAllFriendsByUserId);
+
+// 특정 user의 follower 가져오기
+router.get('/followers', friendController.getAllFollowersByUserId);
 
 module.exports = router;
