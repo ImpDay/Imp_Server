@@ -26,10 +26,32 @@ class FriendController {
     }
   }
 
+  async addFollow(req, res) {
+    try {
+      const myId = req.session.userId;
+      const friendId = req.body.friendId;
+      await friendService.addFollow(myId, friendId);
+      res.status(201).json({ friendId: friendId });
+    } catch (error) {
+      res.status(500).send('친구 관계 생성에 실패했습니다.');
+    }
+  }
+
   async deleteFriend(req, res) {
     try {
       const friendData = req.body;
       await friendService.deleteFriend(friendData);
+      res.status(204).end();
+    } catch (error) {
+      res.status(500).send('friend 지우기에 실패했습니다.');
+    }
+  }
+  async deleteFollow(req, res) {
+    try {
+      
+      const myId = req.session.userId;
+      const friendId = req.body.friendId;
+      await friendService.deleteFollow(myId, friendId);
       res.status(204).end();
     } catch (error) {
       res.status(500).send('friend 지우기에 실패했습니다.');

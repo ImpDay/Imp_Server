@@ -83,6 +83,17 @@ class UserController {
     }
   }
 
+  async getFriendNicknameById(req, res) {
+    try {
+      const id = req.query.friendId;
+      console.log("This is id : " + id);
+      const user = await userService.getUserNicknameById(id);
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).send('사용자 가져오기에 실패했습니다.');
+    }
+  }
+
 }
 
 module.exports = UserController;

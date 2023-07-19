@@ -63,10 +63,6 @@ class RecordDA {
           reject(new Error('템플릿 정보를 가져오는데 실패했습니다.'));
           return;
         }
-        if (results.length === 0) {
-          reject(new Error('해당 사용자가 가진 템플릿이 없습니다.'));
-          return;
-        }
         const records = results;
         // console.log(templates);
         resolve(records);

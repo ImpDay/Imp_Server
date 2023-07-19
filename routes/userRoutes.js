@@ -21,6 +21,9 @@ router.get('/user', userController.getUserById);
 // id로 user nickname 가져오기
 router.get('/nickname', userController.getUserNicknameById);
 
+// id로 user nickname 가져오기
+router.get('/friendsNickname', userController.getFriendNicknameById);
+
 // id로 user profile 가져오기
 // router.get('/:id/nickname', userController.getUserNicknameById);
 

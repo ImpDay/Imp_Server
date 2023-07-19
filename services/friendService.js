@@ -28,6 +28,14 @@ class FriendService {
       throw new Error('친구관계 생성에 실패하였습니다.(FriendService)');
     }
   }
+  async addFollow(myId, friendId){
+    try {
+      const friend = await friendDA.addFollow(myId, friendId);
+      return friend;
+    } catch (error) {
+      throw new Error('친구관계 생성에 실패하였습니다.(FriendService)');
+    }
+  }
 
   async deleteFriend(friendData){
     try {
@@ -37,6 +45,16 @@ class FriendService {
       //   friendData.userId2 = temp;
       // }
       await friendDA.deleteFriend(friendData);
+    } catch (error) {
+      throw new Error('친구 관계 삭제에 실패하였습니다.(FriendService)');
+    }
+  }
+
+  
+  async deleteFollow(myId, friendId){
+    try {
+      
+      await friendDA.deleteFollow(myId, friendId);
     } catch (error) {
       throw new Error('친구 관계 삭제에 실패하였습니다.(FriendService)');
     }

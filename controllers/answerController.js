@@ -19,6 +19,7 @@ class AnswerController {
   async createAnswer(req, res) {
     try {
       const answerData = req.body;
+      answerData.userId = req.session.userId;
       const answerId = await answerService.createAnswer(answerData);
       res.status(201).json({ answerId: answerId });
     } catch (error) {
@@ -83,5 +84,15 @@ class AnswerController {
     }
   }
 
+  async getDateScoreByFriendId(req, res) {
+    try {
+      const date = req.query.date;
+      const friendId = req.query.friendId;
+      const answers = await answerService.getDateScoreByUserId(date, friendId);
+      res.status(200).json(answers);
+    } catch (error) {
+      res.status(500).send('점수 계산에 실패했습니다.');
+    }
+  }
 }
 module.exports = AnswerController;

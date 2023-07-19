@@ -18,8 +18,8 @@ class TemplateController {
 
   async createTemplate(req, res) {
     try {
-      
       const templateData = req.body;
+      templateData.userId = req.session.userId;
       console.log(templateData);
       const templateId = await templateService.createTemplate(templateData);
       res.status(201).json({ templateId: templateId });
@@ -101,6 +101,8 @@ class TemplateController {
       const templateId = req.params.templateId;
       console.log("This is templateId : " + templateId);
       const averageScore = await templateService.getAverageScoreByTemplateId(templateId);
+      console.log(`------------------------`)
+      console.log(averageScore)
       res.status(200).json(averageScore);
     } catch (error) {
       res.status(500).send('Template Name 수정에 실패했습니다.');

@@ -19,6 +19,10 @@ router.get('/recordedDates', recordController.getAllRecordedDateByUserId);
 // 특정 날짜의 점수 반환하기
 router.get('/getScore', answerController.getDateScoreByUserId);
 
+// 특정 날짜의 점수 반환하기
+router.get('/getFriendScore', answerController.getDateScoreByFriendId);
+
+
 // 회원 가입
 router.post('/signup', userController.signup);
 
